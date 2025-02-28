@@ -889,20 +889,32 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    'Tsuzat/NeoSolarized.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    lazy = false,
     config = function()
       ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
+      require('NeoSolarized').setup {
+        style = 'dark', -- "dark" or "light"
+        transparent = true, -- true/false; Enable this to disable setting the background color
+        terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+        enable_italics = true, -- Italics for different hightlight groups (eg. Statement, Condition, Comment, Include, etc.)
         styles = {
-          comments = { italic = false }, -- Disable italics in comments
+          comments = { italic = true }, -- Enable italics in comments
+          keywords = { italic = true },
+          functions = { bold = true },
+          variables = {},
+          string = { italic = true },
+          underline = true, -- true/false; for global underline
+          undercurl = true, -- true/false; for global undercurl
         },
+        on_highlights = function(highlights, color) end,
       }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'NeoSolarized'
     end,
   },
 
